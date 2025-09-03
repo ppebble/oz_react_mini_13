@@ -22,7 +22,7 @@ const MovieCard = ({ movie }) => {
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
-          className="w-full h-48 object-cover"
+          className="w-full h-full object-cover"
         />
         <div
           className={`absolute top-2 right-2 ${getRatingColor(
