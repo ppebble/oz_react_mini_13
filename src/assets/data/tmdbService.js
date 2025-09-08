@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
-export const API_KEY = "23c51479aa5d10a7fbabc6e1c6697475";
+// export const API_KEY = "23c51479aa5d10a7fbabc6e1c6697475";
 export const BASE_PATH = "https://api.themoviedb.org/3";
+const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
 export function getMovies({ url: url, options, enabled: enabled = true }) {
   const [data, setData] = useState(null);
@@ -9,7 +10,13 @@ export function getMovies({ url: url, options, enabled: enabled = true }) {
     if (!url || !enabled) return;
     try {
       const fetchData = async () => {
-        const res = await fetch(url, options);
+        const res = await fetch(url, {
+          ...options,
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        });
         if (!res.ok) {
           throw new Error(`Fetch 실패: ${res.status}`);
         }
@@ -30,7 +37,13 @@ export function getMovie({ url: url, options, enabled: enabled = true }) {
     if (!url || !enabled) return;
     try {
       const fetchData = async () => {
-        const res = await fetch(url, options);
+        const res = await fetch(url, {
+          ...options,
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        });
         if (!res.ok) {
           throw new Error(`Fetch 실패: ${res.status}`);
         }
