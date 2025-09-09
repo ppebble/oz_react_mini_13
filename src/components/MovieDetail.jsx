@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { BASE_PATH, getMovie } from "../assets/data/tmdbService";
+import { BASE_PATH } from "../assets/data/tmdbService";
+import { useGetMovie } from "../hooks/useSearchMovies";
 const MovieDetail = () => {
   const { id } = useParams();
-  const { data } = getMovie({
+  const { data } = useGetMovie({
     url: `${BASE_PATH}/movie/${id}?language=ko-KR`,
   });
   const [movie, setMovie] = useState({});
